@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticketing Center</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: white;
+            text-align: center;
+        }
+        .container {
+            background-color: #222222;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            width: 50%;
+        }
+        .btn-custom {
+            background-color: gold;
+            color: black;
+            margin: 10px 0;
+            width: 100%;
+        }
+        .hidden {
+            display: none;
+        }
+        .form-group {
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-light">Ticketing Center</h2>
+        <details ontoggle="toggleSection('personalInfo')">
+            <summary>Personal Information</summary>
+            <div id="personalInfo" class="hidden">
+                <form>
+                    <div class="form-group">
+                        <label for="name">Complete Name</label>
+                        <input type="text" class="form-control" id="name" placeholder="Enter your name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                    </div>
+                </form>
+                <button class="btn btn-custom" onclick="showMessage('infoMessage')">Submit Personal Info</button>
+                <p id="infoMessage" class="hidden">Thank you for the info, please do this next step.</p>
+            </div> 
+        </details> <br>
+        
+        <details ontoggle="toggleSection('ticketPrice')">
+            <summary>Ticket Price</summary>
+            <div id="ticketPrice" class="hidden">
+                <div class="form-group">
+                    <label for="seat">Choose your seat</label>
+                    <select class="form-control" id="seat">
+                        <option>General Admission</option>
+                        <option>VIP</option>
+                    </select>
+                </div>   
+                <div class="form-group">
+                    <label for="ticketType">Choose Ticket Type</label>
+                    <select class="form-control" id="ticketType">
+                        <option>Student</option>
+                        <option>Regular</option>
+                    </select>
+                </div>
+                <button class="btn btn-custom" onclick="showMessage('priceMessage')">Submit Ticket Info</button>
+                <p id="priceMessage" class="hidden">Thank you for the info, please do this next step.</p>
+            </div>
+        </details> <br>
+        
+        <button class="btn btn-custom" onclick="showTicket()">Print Ticket</button>
+        <div id="ticket"></div>
+    </div>
+    
+    <script>
+        function toggleSection(sectionId) {
+            document.getElementById(sectionId).classList.toggle('hidden');
+        }
+        
+        function showMessage(messageId) {
+            document.getElementById(messageId).classList.remove('hidden');
+        }
+        
+        function showTicket() {
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var seat = document.getElementById("seat").value;
+            var ticketType = document.getElementById("ticketType").value;
+            
+            // this chunk of code is for the popup that will show once you print the ticket 
+            
+            document.getElementById("ticket").innerHTML = 
+                '<div class="text-center mt-4 p-3 border rounded" style="background-color: #333; color: gold;">' +
+                '<h3>🎟 Cinema Ticket 🎟</h3>' +
+                '<p><strong>Name:</strong> ' + name + '</p>' +
+                '<p><strong>Email:</strong> ' + email + '</p>' +
+                '<p><strong>Seat:</strong> ' + seat + '</p>' +
+                '<p><strong>Ticket Type:</strong> ' + ticketType + '</p>' +
+                '<img src="https://raketcontent.com/20240224_133552_0000_cc36de943b.png" alt="Animated Ticket" class="img-fluid">' +
+                '<br><br><button class="btn btn-custom" onclick="location.reload()">Buy More Tickets</button>' +
+                '</div>';
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
